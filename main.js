@@ -5,6 +5,8 @@ function percentY(percent) {
 	return Math.round((percent / 100) * window.innerHeight)
 }
 
+const colorBlack = '#000'
+
 const Engine = Matter.Engine,
 	Bodies = Matter.Bodies,
 	Body = Matter.Body,
@@ -79,6 +81,141 @@ bodies.push(leftWall)
 // add all bodies (boundaries and circles) to the world
 Composite.add(world, bodies)
 
+// HTML Elements
+
+let linkLookbook = document.getElementById('link-lookbook')
+
+let linkBodyWidth = linkLookbook.offsetWidth
+let linkBodyHeight = linkLookbook.offsetHeight
+
+let linkSoundcloud = document.getElementById('link-soundcloud')
+
+let linkSoundcloudBodyWidth = linkSoundcloud.offsetWidth
+let linkSoundcloudBodyHeight = linkSoundcloud.offsetHeight
+
+let linkShop = document.getElementById('link-shop')
+
+let linkShopBodyWidth = linkShop.offsetWidth
+let linkShopBodyHeight = linkShop.offsetHeight
+
+let linkYoutube = document.getElementById('link-youtube')
+
+let linkYoutubeBodyWidth = linkYoutube.offsetWidth
+let linkYoutubeBodyHeight = linkYoutube.offsetHeight
+
+var linkLookbookBody = Bodies.rectangle(
+	100,
+	100,
+	linkBodyWidth,
+	linkBodyHeight,
+	{
+		isStatic: false,
+		element: linkLookbook,
+		chamfer: { radius: 60 },
+		render: {
+			visible: false,
+		},
+	}
+)
+
+var linkSoundcloudBody = Bodies.rectangle(
+	300,
+	100,
+	linkSoundcloudBodyWidth,
+	linkSoundcloudBodyHeight,
+	{
+		isStatic: false,
+		element: linkSoundcloud,
+		chamfer: { radius: 60 },
+		render: {
+			visible: false,
+		},
+	}
+)
+
+var linkShopBody = Bodies.rectangle(
+	500,
+	100,
+	linkShopBodyWidth,
+	linkShopBodyHeight,
+	{
+		isStatic: false,
+		element: linkShop,
+		chamfer: { radius: 60 },
+		render: {
+			visible: false,
+		},
+	}
+)
+
+var linkYoutubeBody = Bodies.rectangle(
+	800,
+	100,
+	linkYoutubeBodyWidth,
+	linkYoutubeBodyHeight,
+	{
+		isStatic: false,
+		element: linkYoutube,
+		chamfer: { radius: 60 },
+		render: {
+			visible: false,
+		},
+	}
+)
+
+Composite.add(world, [
+	linkLookbookBody,
+	linkSoundcloudBody,
+	linkShopBody,
+	linkYoutubeBody,
+])
+
+// Update Position
+Matter.Events.on(engine, 'beforeUpdate', function (event) {
+	// Update the position of the div element based on the Matter.js body
+	linkLookbook.style.left =
+		linkLookbookBody.position.x - linkBodyWidth / 2 + 'px'
+	linkLookbook.style.top =
+		linkLookbookBody.position.y - linkBodyHeight / 2 + 'px'
+
+	var angleRadians = linkLookbookBody.angle
+	var angleDegrees = (angleRadians * 180) / Math.PI
+
+	linkLookbook.style.transform = 'rotate(' + angleDegrees + 'deg)'
+
+	// link Soundcloud update
+	linkSoundcloud.style.left =
+		linkSoundcloudBody.position.x - linkSoundcloudBodyWidth / 2 + 'px'
+	linkSoundcloud.style.top =
+		linkSoundcloudBody.position.y - linkSoundcloudBodyHeight / 2 + 'px'
+
+	var angleRadianslinkSoundcloud = linkSoundcloudBody.angle
+	var angleDegreeslinkSoundcloud = (angleRadianslinkSoundcloud * 180) / Math.PI
+
+	linkSoundcloud.style.transform =
+		'rotate(' + angleDegreeslinkSoundcloud + 'deg)'
+
+	// link Shop update
+	linkShop.style.left = linkShopBody.position.x - linkShopBodyWidth / 2 + 'px'
+	linkShop.style.top = linkShopBody.position.y - linkShopBodyHeight / 2 + 'px'
+
+	var angleRadianslinkShop = linkShopBody.angle
+	var angleDegreeslinkShop = (angleRadianslinkShop * 180) / Math.PI
+
+	linkShop.style.transform = 'rotate(' + angleDegreeslinkShop + 'deg)'
+
+	// link Youtube update
+	linkYoutube.style.left =
+		linkYoutubeBody.position.x - linkYoutubeBodyWidth / 2 + 'px'
+	linkYoutube.style.top =
+		linkYoutubeBody.position.y - linkYoutubeBodyHeight / 2 + 'px'
+
+	var angleRadianslinkYoutube = linkYoutubeBody.angle
+	var angleDegreeslinkYoutube = (angleRadianslinkYoutube * 180) / Math.PI
+
+	linkYoutube.style.transform = 'rotate(' + angleDegreeslinkYoutube + 'deg)'
+})
+
 // SVGs
 
 let vertexSets = [],
@@ -91,30 +228,39 @@ let vertexSets = [],
 	svgFour,
 	svgFourCounter,
 	svgF,
-	svgR
+	svgR,
+	svgStrawberry,
+	svgBanana,
+	svgOrange,
+	svgPeach,
+	svgPear
 
-let cX = percentX(20)
+// letter coordinate position
+let cX = percentX(30)
 let cY = percentY(20)
 
 let iX = percentX(40)
 let iY = percentY(30)
 
-let aX = percentX(60)
+let aX = percentX(10)
 let aY = percentY(20)
 
-let aXLegOne = aX - 43
-let aYLegOne = aY + 49
+let aXLegOne = aX - 43 * 2.49
+let aYLegOne = aY + 49 * 2.47
 
-let aXLegTwo = aX + 43
-let aYLegTwo = aY + 49
+let aXLegTwo = aX + 43 * 2.47
+let aYLegTwo = aY + 49 * 2.47
 
 let oX = percentX(80)
 let oY = percentY(30)
 
-// let letterSize = (window.innerWidth / 1000);
+// fruit scale
+let fruitScaleXY = 4
 
-let letterSizeHorizontal = 0.8,
-	letterSizeVertical = 0.8
+// let letterSize = window.innerWidth / 1000
+
+let letterSizeHorizontal = 2,
+	letterSizeVertical = 2
 
 // Strawberry SVG
 
@@ -126,7 +272,7 @@ shapeStrawberry.forEach((path) => {
 	svgStrawberry = Bodies.fromVertices(
 		cX,
 		cY,
-		Vertices.scale(Svg.pathToVertices(path, 3), 2, 2),
+		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
 		{
 			render: {
 				fillStyle: '#F50100',
@@ -148,7 +294,7 @@ shapeBanana.forEach((path) => {
 	svgBanana = Bodies.fromVertices(
 		cX,
 		cY,
-		Vertices.scale(Svg.pathToVertices(path, 3), 2, 2),
+		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
 		{
 			render: {
 				fillStyle: '#FFC227',
@@ -170,7 +316,7 @@ shapePeach.forEach((path) => {
 	svgPeach = Bodies.fromVertices(
 		cX,
 		cY,
-		Vertices.scale(Svg.pathToVertices(path, 3), 2, 2),
+		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
 		{
 			render: {
 				fillStyle: '#FFA28D',
@@ -192,7 +338,7 @@ shapeOrange.forEach((path) => {
 	svgOrange = Bodies.fromVertices(
 		cX,
 		cY,
-		Vertices.scale(Svg.pathToVertices(path, 3), 2, 2),
+		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
 		{
 			render: {
 				fillStyle: '#FF9000',
@@ -214,7 +360,7 @@ shapePear.forEach((path) => {
 	svgPear = Bodies.fromVertices(
 		cX,
 		cY,
-		Vertices.scale(Svg.pathToVertices(path, 3), 2, 2),
+		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
 		{
 			render: {
 				fillStyle: '#B6EF01',
@@ -297,8 +443,8 @@ $('#svg-3')
 			),
 			{
 				render: {
-					fillStyle: '#000',
-					strokeStyle: '#000',
+					fillStyle: colorBlack,
+					strokeStyle: colorBlack,
 					lineWidth: 2,
 				},
 			},
@@ -321,8 +467,8 @@ $('#svg-3-leg-1')
 			),
 			{
 				render: {
-					fillStyle: '#000',
-					strokeStyle: '#000',
+					fillStyle: colorBlack,
+					strokeStyle: colorBlack,
 					lineWidth: 2,
 					isStatic: true,
 				},
@@ -346,8 +492,8 @@ $('#svg-3-leg-2')
 			),
 			{
 				render: {
-					fillStyle: '#000',
-					strokeStyle: '#000',
+					fillStyle: colorBlack,
+					strokeStyle: colorBlack,
 					lineWidth: 2,
 					isStatic: true,
 				},
@@ -385,6 +531,48 @@ $('#svg-3-counter')
 // create compound body for letter "A"
 var compoundBodyA = Body.create({
 	parts: [svgThree, svgThreeLegOne, svgThreeLegTwo, svgThreeCounter],
+})
+
+// letter "F"
+let shapeF = document.getElementById('svg-f').querySelectorAll('path')
+
+shapeF.forEach((path) => {
+	svgF = Bodies.fromVertices(
+		300,
+		100,
+		Vertices.scale(Svg.pathToVertices(path, 3), 4.7, 4.7),
+		{
+			render: {
+				fillStyle: colorBlack,
+				strokeStyle: colorBlack,
+				lineWidth: 2,
+			},
+		},
+		true
+	)
+
+	vertexSets.push(svgF)
+})
+
+// letter "R"
+let shapeR = document.getElementById('svg-r').querySelectorAll('path')
+
+shapeR.forEach((path) => {
+	svgR = Bodies.fromVertices(
+		900,
+		100,
+		Vertices.scale(Svg.pathToVertices(path, 3), 4.7, 4.7),
+		{
+			render: {
+				fillStyle: colorBlack,
+				strokeStyle: colorBlack,
+				lineWidth: 2,
+			},
+		},
+		true
+	)
+
+	vertexSets.push(svgR)
 })
 
 // // O
@@ -460,47 +648,6 @@ const runner = Runner.create()
 
 // run the engine
 Runner.run(runner, engine)
-
-// gravity
-
-let intervalID
-
-function changeGravity() {
-	if (!intervalID) {
-		intervalID = setInterval(setGravity, 3000)
-	}
-}
-
-let intervalNumber = 1
-function setGravity() {
-	if (intervalNumber === 1) {
-		// console.log("interval " + intervalNumber + ", down");
-		world.gravity.y = 0.5
-		world.gravity.x = 0
-		intervalNumber += 1
-	} else if (intervalNumber === 2) {
-		// console.log("interval " + intervalNumber + ", up");
-		world.gravity.y = -0.5
-		world.gravity.x = 0
-		intervalNumber += 1
-	} else if (intervalNumber === 3) {
-		// console.log("interval " + intervalNumber + ", right");
-		world.gravity.x = 0.5
-		world.gravity.y = 0
-		intervalNumber += 1
-	} else {
-		// console.log("interval " + intervalNumber + ", left");
-		world.gravity.x = -0.5
-		world.gravity.y = 0
-		intervalNumber = 1
-	}
-}
-
-// hold in place for testing
-// world.gravity.y = 0;
-// world.gravity.x = 0;
-
-changeGravity()
 
 // mouse control
 

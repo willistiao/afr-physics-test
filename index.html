@@ -3,9 +3,20 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>All Fruits Radio</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+			rel="stylesheet"
+		/>
 		<link rel="stylesheet" href="./style.css" />
 	</head>
 	<body>
+		<a href="#" id="link-lookbook" class="main-body-link">Lookbook</a>
+		<a href="#" id="link-soundcloud" class="main-body-link">Soundcloud</a>
+		<a href="#" id="link-youtube" class="main-body-link">YouTube</a>
+		<a href="#" id="link-shop" class="main-body-link">Shop</a>
+
 		<svg class="semi">
 			<path
 				d="M 98,93 L 169,93 C 169,54 137,22 98,22 C 59,22 27,54 27,93 L 98,93 z "
@@ -95,6 +106,20 @@
 			<path d="M94.6,89L81.8,55L69,89H94.6z" />
 		</svg>
 
+		<!-- F -->
+		<svg class="svg-letter" id="svg-f">
+			<path
+				d="M0.388672 0.410156H6.95117V2.25586H3.05469V3.75586H6.38281V5.49023H3.05469V9H0.388672V0.410156Z"
+			/>
+		</svg>
+
+		<!-- R -->
+		<svg class="svg-letter" id="svg-r">
+			<path
+				d="M0.03125 0.410156H4.44336C5.4043 0.410156 6.12305 0.638672 6.59961 1.0957C7.08008 1.55273 7.32031 2.20312 7.32031 3.04688C7.32031 3.91406 7.05859 4.5918 6.53516 5.08008C6.01562 5.56836 5.2207 5.8125 4.15039 5.8125H2.69727V9H0.03125V0.410156Z"
+			/>
+		</svg>
+
 		<!-- O -->
 
 		<svg class="svg-letter" id="svg-4">
@@ -113,6 +138,6 @@
 		<script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/poly-decomp@0.3.0/build/decomp.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
-		<script src="./main.js"></script>
+		<script src="./main.js" type="module"></script>
 	</body>
 </html>

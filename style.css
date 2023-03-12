@@ -1,3 +1,12 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
 .verticalhorizontal {
 	position: absolute;
 	display: table-cell;
@@ -15,6 +24,20 @@ svg {
 	display: none;
 }
 
-body {
-	overflow-x: hidden;
+.main-body-link {
+	font-family: 'Inter', serif;
+	font-size: 80px;
+	letter-spacing: -0.1em;
+	border-radius: 80px;
+	border: solid 3px black;
+	padding: 15px 45px;
+	position: absolute;
+	text-decoration: none;
+	color: black;
+	word-wrap: normal;
+}
+
+.main-body-link:hover {
+	background: black;
+	color: white;
 }
