@@ -25,7 +25,7 @@ svg {
 }
 
 .main-body-link {
-	font-family: 'Inter', serif;
+	font-family: 'Inter', sans-serif;
 	font-size: 80px;
 	letter-spacing: -0.1em;
 	border-radius: 80px;
@@ -40,4 +40,25 @@ svg {
 .main-body-link:hover {
 	background: black;
 	color: white;
+}
+
+h2 {
+	font-family: 'Inter', sans-serif;
+	font-size: 20px;
+	letter-spacing: -0.09rem;
+	color: black;
+	mix-blend-mode: overlay;
+}
+
+.nav-wrapper {
+	position: fixed;
+	padding: 30px 50px;
+	pointer-events: none;
+}
+
+.logo-wrap {
+}
+
+canvas {
+	/* border: solid 1px blue; */
 }

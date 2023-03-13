@@ -1,3 +1,8 @@
+import { addDate } from './js/addDateTime'
+
+addDate()
+setInterval(addDate, 1000)
+
 function percentX(percent) {
 	return Math.round((percent / 100) * window.innerWidth)
 }
@@ -233,7 +238,9 @@ let vertexSets = [],
 	svgBanana,
 	svgOrange,
 	svgPeach,
-	svgPear
+	svgPear,
+	svgLemon,
+	svgPom
 
 // letter coordinate position
 let cX = percentX(30)
@@ -292,8 +299,8 @@ let shapeBanana = document.getElementById('svg-banana').querySelectorAll('path')
 
 shapeBanana.forEach((path) => {
 	svgBanana = Bodies.fromVertices(
-		cX,
-		cY,
+		cX + 50,
+		cY - 50,
 		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
 		{
 			render: {
@@ -358,8 +365,8 @@ let shapePear = document.getElementById('svg-pear').querySelectorAll('path')
 
 shapePear.forEach((path) => {
 	svgPear = Bodies.fromVertices(
-		cX,
-		cY,
+		cX - 100,
+		cY + 50,
 		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
 		{
 			render: {
@@ -372,6 +379,50 @@ shapePear.forEach((path) => {
 	)
 
 	vertexSets.push(svgPear)
+})
+
+// Lemon
+
+let shapeLemon = document.getElementById('svg-lemon').querySelectorAll('path')
+
+shapeLemon.forEach((path) => {
+	svgLemon = Bodies.fromVertices(
+		cX,
+		cY,
+		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
+		{
+			render: {
+				fillStyle: '#EFE940',
+				strokeStyle: '#EFE940',
+				lineWidth: 2,
+			},
+		},
+		true
+	)
+
+	vertexSets.push(svgLemon)
+})
+
+// Pomegranate
+
+let shapePom = document.getElementById('svg-pom').querySelectorAll('path')
+
+shapePom.forEach((path) => {
+	svgPom = Bodies.fromVertices(
+		cX + 300,
+		cY - 100,
+		Vertices.scale(Svg.pathToVertices(path, 3), fruitScaleXY, fruitScaleXY),
+		{
+			render: {
+				fillStyle: '#FF45B5',
+				strokeStyle: '#FF45B5',
+				lineWidth: 2,
+			},
+		},
+		true
+	)
+
+	vertexSets.push(svgPom)
 })
 
 // // I
@@ -648,6 +699,21 @@ const runner = Runner.create()
 
 // run the engine
 Runner.run(runner, engine)
+
+// // update on resize
+// const canvas = document.querySelector('canvas')
+
+// function resizeCanvas() {
+// 	render.width = window.innerWidth
+// 	render.height = window.innerHeight
+// 	Render.setPixelRatio(render, window.devicePixelRatio)
+// 	Render.setSize(render, render.width, render.height)
+// }
+// // Call the resize function initially to set the initial canvas dimensions
+// resizeCanvas()
+
+// // Call the resize function on window resize
+// window.addEventListener('resize', resizeCanvas)
 
 // mouse control
 
